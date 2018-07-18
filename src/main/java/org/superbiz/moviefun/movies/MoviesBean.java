@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.superbiz.moviefun;
+package org.superbiz.moviefun.movies;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,20 +23,18 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 public class MoviesBean {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "movies")
     private EntityManager entityManager;
 
     public Movie find(Long id) {
         return entityManager.find(Movie.class, id);
     }
 
-    @Transactional
     public void addMovie(Movie movie) {
         entityManager.persist(movie);
     }
